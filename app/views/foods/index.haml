@@ -1,0 +1,8 @@
+%h5.card-header.d-flex.justify-content-between.align-items-center
+  Foods
+  = button_to 'Add', new_food_path, class: 'btn btn-primary', method: :get
+
+.card-body
+  .card-group
+    - @foods.each do |food|
+      = render partial: 'food_card', locals: {food: food}

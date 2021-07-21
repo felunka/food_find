@@ -5,7 +5,28 @@
     %title FoodFind
     = csrf_meta_tags
     = csp_meta_tag
+
+    %meta{content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport"}
+
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
-    = yield
+  %body.bg-dark
+    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      %a.navbar-brand
+        FoodFind
+      %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNav", "data-toggle" => "collapse", :type => "button"}
+        %span.navbar-toggler-icon
+      .collapse.navbar-collapse{ id: :navbarNav }
+        %ul.navbar-nav
+          = nav_item 'Home', root_path
+          = nav_item 'Foods', foods_path
+          = nav_item 'Tags', tags_path
+
+    .container
+      - flash.each do |key, value|
+        .alert.alert-dismissible.mt-3{class: "alert-#{key}", role: 'alert'}
+          = value
+          %button.btn-close.close{'data-bs-dismiss' => 'alert', 'aria-label' => 'Close', 'type' => 'button'}
+
+      .card.mt-3
+        = yield

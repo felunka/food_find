@@ -1,0 +1,8 @@
+%h5.card-header.d-flex.justify-content-between.align-items-center
+  Foods
+  = button_to 'Cancel', foods_path, class: 'btn btn-secondary', method: :get
+
+.card-body
+  = simple_form_for @food do |f|
+    = f.input :name
+    = f.submit 'Save', class: 'btn btn-primary mt-2'
