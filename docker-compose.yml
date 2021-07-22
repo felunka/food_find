@@ -2,6 +2,7 @@ version: '3.0'
 services:
   db:
     image: postgres:13.1-alpine
+    hostname: ${POSTGRES_HOSTNAME:-db}
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
@@ -17,6 +18,7 @@ services:
     depends_on:
       - db
     environment:
+      POSTGRES_HOSTNAME: ${POSTGRES_HOSTNAME:-db}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       RAILS_ENV: production
       RAILS_SERVE_STATIC_FILES: serve
