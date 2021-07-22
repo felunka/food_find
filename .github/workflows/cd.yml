@@ -25,4 +25,4 @@ jobs:
           IMAGE_TAG=staging
           POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_HOSTNAME=HnvqsN
-          /usr/local/bin/docker-compose --file docker-compose.prod.yml --project-name staging_helpercloud up --detach --remove-orphans --build
+          /usr/local/bin/docker-compose --file docker-compose.yml --project-name food_find up --detach --remove-orphans --build
