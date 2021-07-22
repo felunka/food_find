@@ -23,6 +23,7 @@ jobs:
           ROUTER_NAME=food_find
           DOMAIN=food_find.felunka.de
           IMAGE_TAG=staging
+          RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
           POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_HOSTNAME=HnvqsN
           /usr/local/bin/docker-compose --file docker-compose.yml --project-name food_find up --detach --remove-orphans --build
