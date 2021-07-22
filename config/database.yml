@@ -18,5 +18,5 @@ test:
 
 production:
   <<: *default
-  # TODO: set password via actions on deploy
-  password: 
+  host: db
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
