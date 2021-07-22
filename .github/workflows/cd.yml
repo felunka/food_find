@@ -1,0 +1,28 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deploy:
+    runs-on: [self-hosted, contabo]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Run containers
+        run: >
+          ROUTER_NAME=food_find
+          DOMAIN=food_find.felunka.de
+          IMAGE_TAG=staging
+          POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_HOSTNAME=HnvqsN
+          /usr/local/bin/docker-compose --file docker-compose.prod.yml --project-name staging_helpercloud up --detach --remove-orphans --build
