@@ -1,8 +1,15 @@
-%h5.card-header.d-flex.justify-content-between.align-items-center
-  Foods
-  = button_to 'Cancel', foods_path, class: 'btn btn-secondary', method: :get
+.card.mt-3
+  %h5.card-header.d-flex.justify-content-between.align-items-center
+    Foods
+    .row
+      - if @food.id.present?
+        .col.p-0
+          = button_to 'Delete', food_path(@food), class: 'btn btn-danger', method: :delete
+      .col
+        = button_to 'Cancel', foods_path, class: 'btn btn-secondary', method: :get
 
-.card-body
-  = simple_form_for @food do |f|
-    = f.input :name
-    = f.submit 'Save', class: 'btn btn-primary mt-2'
+  .card-body
+    = simple_form_for @food do |f|
+      = f.input :name
+      = f.association :tags, input_html: {class: 'js-states'}
+      = f.submit 'Save', class: 'btn btn-primary mt-2'

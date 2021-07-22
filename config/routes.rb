@@ -4,4 +4,6 @@ Rails.application.routes.draw do
 
   resources :foods
   resources :tags
+
+  post '/randomizer', to: 'randomizer#randomize'
 end

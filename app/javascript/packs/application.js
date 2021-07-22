@@ -11,14 +11,19 @@ require("jquery")
 
 require("bootstrap")
 import "../stylesheets/application";
+
+import "@fortawesome/fontawesome-free/css/all"
+
+import 'select2'
+import 'select2/dist/css/select2.css'
+
 document.addEventListener("turbolinks:load", function() {
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
         $('[data-toggle="popover"]').popover()
+        $('.js-states').select2()
     })
 })
-
-import "@fortawesome/fontawesome-free/css/all"
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

@@ -30,4 +30,10 @@ class TagsController < ApplicationController
   def index
     @tags = Tag.all
   end
+
+  def destroy
+    Tag.find_by(params.permit(:id)).destroy
+    flash[:danger] = 'Tag deleted'
+    redirect_to action: 'index'
+  end
 end
