@@ -29,3 +29,7 @@ services:
       - traefik.http.routers.${ROUTER_NAME:-food_find}.tls.certresolver=letsencrypt
 volumes:
   db-data:
+networks:
+  default:
+    external:
+      name: traefik_default
