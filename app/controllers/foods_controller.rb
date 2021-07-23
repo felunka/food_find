@@ -8,7 +8,7 @@ class FoodsController < ApplicationController
   end
 
   def create
-    @food = Food.new params.require(:food).permit(:name, :tag_ids)
+    @food = Food.new params.require(:food).permit(:name, tag_ids: [])
     if @food.save
       flash[:success] = 'Food created'
       redirect_to action: 'index'
