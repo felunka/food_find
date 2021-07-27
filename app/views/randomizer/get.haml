@@ -4,7 +4,7 @@
 
   .card-body
     = simple_form_for :filter, url: randomizer_path do |f|
-      = f.input :tag_ids, collection: Tag.all, label: 'Tags', input_html: {class: 'js-states', multiple: true}
+      = f.input :tag_ids, required: false, collection: Tag.all, label: 'Tags', input_html: {class: 'js-states', multiple: true}
       = f.submit 'Suprise me!', class: 'btn btn-primary mt-2'
 
 - if @selected_food
