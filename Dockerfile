@@ -8,14 +8,13 @@ RUN apt-get update -qq && apt-get install -y nodejs npm yarn postgresql-client
 RUN mkdir /app
 WORKDIR /app
 
+# Install yarn
+RUN npm install -g yarn
+
 # Install gems
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
 RUN bundle install
-
-# Install yarn
-COPY package.json /app/package.json
-RUN npm install -g yarn
 
 # Copy rails code
 ADD . /app
