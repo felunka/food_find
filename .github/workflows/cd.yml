@@ -21,7 +21,7 @@ jobs:
       - name: Run containers
         run: >
           ROUTER_NAME=food_find
-          DOMAIN=food_find.felunka.de
+          DOMAIN=foodfind.felunka.de
           IMAGE_TAG=staging
           RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
           POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
