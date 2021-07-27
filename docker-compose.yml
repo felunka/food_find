@@ -11,6 +11,8 @@ services:
   web:
     build: .
     command: bash -c "rm -f /myapp/tmp/pids/server.pid && rails db:migrate && rails s -p 3000 -b '0.0.0.0'"
+    networks:
+      - reverse_proxy
     ports:
       - "3000:3000"
     depends_on:
@@ -29,6 +31,6 @@ services:
 volumes:
   db-data:
 networks:
-  default:
+  reverse_proxy:
     external:
-      name: traefik_default
+      name: reverse_proxy
