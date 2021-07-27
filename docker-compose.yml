@@ -10,9 +10,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?err}
   web:
     build: .
-    command: bash -c "rails s -p 3000 -b '0.0.0.0'"
-    volumes:
-      - .:/app
+    command: bash -c "rm -f /myapp/tmp/pids/server.pid && rails s -p 3000 -b '0.0.0.0'"
     ports:
       - "3000:3000"
     depends_on:
