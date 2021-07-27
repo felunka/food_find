@@ -13,8 +13,6 @@ COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
 RUN bundle install
 
-RUN echo "here"
-
 # Install yarn
 COPY package.json /app/package.json
 RUN npm install -g yarn
@@ -22,7 +20,6 @@ RUN npm install -g yarn
 # Copy rails code
 ADD . /app
 RUN bundle exec rake assets:precompile
-RUN rails db:migrate
 
 # Configure the main process to run when running the image
 CMD ["rails", "server", "-b", "0.0.0.0"]
