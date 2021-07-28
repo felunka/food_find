@@ -17,10 +17,12 @@
         %button.navbar-toggler{ data: {bs: {toggle: 'collapse', target: '#navbarToggler'}}, aria: {controls: 'navbarToggler', expanded: false, label: 'Toggle navigation'}, type: 'button'}
           %span.navbar-toggler-icon
         .collapse.navbar-collapse{ id: 'navbarToggler' }
-          %ul.navbar-nav
+          %ul.navbar-nav.me-auto.mb-2.mb-lg-0
             = nav_item 'Home', root_path
             = nav_item 'Foods', foods_path
             = nav_item 'Tags', tags_path
+          .d-flex
+            = button_to 'Logout', session_path, class: 'btn btn-danger', method: :delete
 
     .container
       - flash.each do |key, value|

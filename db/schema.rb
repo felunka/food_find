@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_27_090954) do
+ActiveRecord::Schema.define(version: 2021_07_28_183125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "credentials", force: :cascade do |t|
+    t.string "external_id"
+    t.string "public_key"
+    t.bigint "user_id", null: false
+    t.string "nickname"
+    t.bigint "sign_count", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_credentials_on_user_id"
+  end
 
   create_table "food_tags", force: :cascade do |t|
     t.bigint "food_id", null: false
@@ -34,6 +45,14 @@ ActiveRecord::Schema.define(version: 2021_06_27_090954) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "webauthn_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "credentials", "users"
   add_foreign_key "food_tags", "foods"
   add_foreign_key "food_tags", "tags"
 end

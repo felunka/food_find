@@ -6,4 +6,12 @@ Rails.application.routes.draw do
   resources :tags
 
   post '/randomizer', to: 'randomizer#randomize'
+
+  resource :session, only: [:new, :create, :destroy] do
+    post :callback
+  end
+
+  resource :registration, only: [:new, :create] do
+    post :callback
+  end
 end

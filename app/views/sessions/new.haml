@@ -1,0 +1,11 @@
+.card.mt-3
+  %h5.card-header.d-flex.justify-content-between.align-items-center
+    Sign in
+    .row
+      .col
+        = button_to 'Register', new_registration_path, method: :get, class: 'btn btn-secondary'
+
+  .card-body
+    = simple_form_for :session, url: session_path, remote: true, html: {id: :session_form} do |f|
+      = f.input :username, required: true
+      = f.submit 'Sign in using WebAuthn', class: 'btn btn-primary mt-2'
