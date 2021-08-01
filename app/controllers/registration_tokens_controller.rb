@@ -11,7 +11,7 @@ class RegistrationTokensController < ApplicationController
 
   def destroy
     RegistrationToken.find_by(params.permit(:id)).destroy
-    flash[:danger] = 'Tag deleted'
+    flash[:danger] = 'Token deleted'
     redirect_to action: 'index'
   end
 end
