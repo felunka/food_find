@@ -5,31 +5,19 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(username: session_params[:username])
+    get_options = WebAuthn::Credential.options_for_get(allow: Credential.all.pluck(:external_id))
 
-    if user
-      get_options = WebAuthn::Credential.options_for_get(allow: user.credentials.pluck(:external_id))
+    session[:current_authentication] = { challenge: get_options.challenge }
 
-      session[:current_authentication] = { challenge: get_options.challenge, username: session_params[:username] }
-
-      respond_to do |format|
-        format.json { render json: get_options }
-      end
-    else
-      respond_to do |format|
-        format.json { render json: { errors: ['Username does not exist'] }, status: :unprocessable_entity }
-      end
+    respond_to do |format|
+      format.json { render json: get_options }
     end
   end
 
   def callback
     webauthn_credential = WebAuthn::Credential.from_get(params)
 
-    user = User.find_by(username: session['current_authentication']['username'])
-
-    raise "user #{session['current_authentication']['username']} never initiated sign up" unless user
-
-    credential = user.credentials.find_by(external_id: Base64.strict_encode64(webauthn_credential.raw_id))
+    credential = Credential.find_by(external_id: Base64.strict_encode64(webauthn_credential.raw_id))
 
     begin
       webauthn_credential.verify(
@@ -39,7 +27,7 @@ class SessionsController < ApplicationController
       )
 
       credential.update!(sign_count: webauthn_credential.sign_count)
-      session[:user_id] = user.id
+      session[:logged_in] = true
 
       render json: { status: 'ok' }, status: :ok
     rescue WebAuthn::Error => e
@@ -50,14 +38,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    session[:logged_in] = nil
 
     redirect_to action: 'new'
-  end
-
-  private
-
-  def session_params
-    params.require(:session).permit(:username)
   end
 end

@@ -30,8 +30,7 @@ document.addEventListener("turbolinks:load", function() {
     console.log(event.detail[0])
 
     if (credentialOptions["user"]) {
-      let credential_nickname = event.target.querySelector("input[name='registration[username]']").value;
-      let callback_url = `/registration/callback?credential_nickname=${credential_nickname}`
+      let callback_url = `/registration/callback`
       
       Credential.create(encodeURI(callback_url), credentialOptions);
     }
