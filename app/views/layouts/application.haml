@@ -26,7 +26,7 @@
             .d-flex
               = button_to 'Logout', session_path, class: 'btn btn-danger', method: :delete
 
-    .container
+    .container{id: :flashbox }
       - flash.each do |key, value|
         .alert.alert-dismissible.mt-3{class: "alert-#{key}", role: 'alert'}
           = value
