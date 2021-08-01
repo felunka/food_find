@@ -18,6 +18,8 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    volumes:
+      - active_storage:/app/storage
     environment:
       RAILS_MASTER_KEY: ${RAILS_MASTER_KEY:?err}
       POSTGRES_HOSTNAME: ${POSTGRES_HOSTNAME:-db}

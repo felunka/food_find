@@ -9,7 +9,8 @@
         = button_to 'Cancel', foods_path, class: 'btn btn-secondary', method: :get
 
   .card-body
-    = simple_form_for @food do |f|
+    = simple_form_for @food, html: {multipart: true} do |f|
       = f.input :name
+      = f.input :photo, as: :file, input_html: { class: 'form-control', accept: '.png,.jpg' }, label_html: { class: 'form-label' }
       = f.association :tags, input_html: {class: 'js-states'}
       = f.submit 'Save', class: 'btn btn-primary mt-2'

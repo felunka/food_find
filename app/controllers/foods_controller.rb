@@ -8,7 +8,7 @@ class FoodsController < ApplicationController
   end
 
   def create
-    @food = Food.new params.require(:food).permit(:name, tag_ids: [])
+    @food = Food.new params.require(:food).permit(:name, :photo, tag_ids: [])
     if @food.save
       flash[:success] = 'Food created'
       redirect_to action: 'index'
@@ -23,7 +23,7 @@ class FoodsController < ApplicationController
 
   def update
     @food = Food.find_by params.permit(:id)
-    if @food.update params.require(:food).permit(:name, tag_ids: [])
+    if @food.update params.require(:food).permit(:name, :photo, tag_ids: [])
       flash[:success] = 'Food updated'
       redirect_to action: 'index'
     else

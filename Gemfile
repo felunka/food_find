@@ -15,6 +15,8 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
+gem 'image_processing'
+gem 'rmagick'
 
 gem 'haml', '~> 5.1'
 gem 'simple_form'

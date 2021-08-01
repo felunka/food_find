@@ -8,15 +8,15 @@
       = f.submit 'Suprise me!', class: 'btn btn-primary mt-2'
 
 - if @selected_food
-  .card.mt-3
-    %h5.card-header
-      Today you are cooking:
-    .card-body
+  .card.mt-3.mb-3
+    - if @selected_food.photo.attached?
+      = image_tag url_for(@selected_food.cropped_photo), class: 'card-img'
+    .card-img-overlay
       %h5.card-title.d-flex.justify-content-between.align-items-center
+        Today you are cooking:
+      %span.card-text
         = @selected_food.name
-      - @selected_food.tags.each do |tag|
-        %span.badge.badge-primary
-          = tag.name
-
-
-
+      %span.card-text
+        - @selected_food.tags.each do |tag|
+          %span.badge.badge-primary
+            = tag.name
