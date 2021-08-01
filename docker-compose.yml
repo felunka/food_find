@@ -35,6 +35,7 @@ services:
       - traefik.http.routers.${ROUTER_NAME:-food_find}.tls.certresolver=letsencrypt
 volumes:
   db-data:
+  active_storage:
 networks:
   reverse_proxy:
     external:
