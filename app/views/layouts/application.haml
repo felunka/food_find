@@ -21,8 +21,9 @@
             = nav_item 'Home', root_path
             = nav_item 'Foods', foods_path
             = nav_item 'Tags', tags_path
-          .d-flex
-            = button_to 'Logout', session_path, class: 'btn btn-danger', method: :delete
+          - if current_user
+            .d-flex
+              = button_to 'Logout', session_path, class: 'btn btn-danger', method: :delete
 
     .container
       - flash.each do |key, value|
