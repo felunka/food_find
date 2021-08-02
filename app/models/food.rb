@@ -7,6 +7,6 @@ class Food < ApplicationRecord
   validates :name, presence: true
 
   def cropped_photo
-    photo.variant(combine_options: { gravity: 'Center', crop: '320x240+0+0' })
+    photo.variant(resize_to_limit: [320, 240] )
   end
 end
